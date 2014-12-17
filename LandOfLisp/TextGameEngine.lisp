@@ -1,3 +1,5 @@
+(defparameter *location* 'living-room)
+
 (defparameter *nodes* '((living-room (you are in the living-room.
 				      a wizard is snoring loudly on the couch.))
 			(garden (you are in a beautiful garden.
@@ -37,7 +39,7 @@
 (defun describe-objects (loc objs obj-loc)
   (labels ((describe-obj (obj)
 	     `(you see a ,obj on the floor.)))
-    (apply #'append (mapcar #'describe-obj (object-at loc objs obj-loc)))))
+    (apply #'append (mapcar #'describe-obj (objects-at loc objs obj-loc)))))
 
 (defun look ()
   (append (describe-location *location* *nodes*)
@@ -62,3 +64,6 @@
 
 (defun inventory()
   (cons 'items- (objects-at 'body *objects* *object-locations*)))
+
+(defun game-repl ()
+  (loop (print (eval (read)))))
